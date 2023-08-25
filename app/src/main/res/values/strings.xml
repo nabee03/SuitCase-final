@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SuitCase</string>
+    <string name="nav_open">SuitCase</string>
+    <string name="nav_close">SuitCase</string>
+</resources>
