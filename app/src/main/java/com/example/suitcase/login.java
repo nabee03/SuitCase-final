@@ -1,11 +1,11 @@
 package com.example.suitcase;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.suitcase.databinding.ActivityLoginPageBinding;
 
@@ -17,10 +17,7 @@ public class Login_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityLoginPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-      if (getSupportActionBar()!=null){
-          getSupportActionBar().hide();
-
-      }
+        getSupportActionBar().hide();
 
         databaseHelper=new DatabaseHelper(this);
 
@@ -31,7 +28,7 @@ public class Login_Page extends AppCompatActivity {
                 String password=binding.txtLoginPassword.getText().toString().trim();
 
                 if(email.equals("") || password.equals("")){
-                    Toast.makeText(Login_Page.this, "All Feilds are Mandatory", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login_Page.this, "All field are mandatory", Toast.LENGTH_SHORT).show();
                 }else {
                     Boolean checkCredential=databaseHelper.checkEmailPassword(email,password);
                     if (checkCredential==true){
