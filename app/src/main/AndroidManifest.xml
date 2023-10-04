@@ -6,29 +6,30 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuitCase"
         tools:targetApi="31">
         <activity
-            android:name=".ResetPassword"
+            android:name=".forgot_password"
             android:exported="false" />
         <activity
-            android:name=".ForgetPassword_Page"
+            android:name=".edit_items"
+            android:exported="false" />
+
+        <activity
+            android:name=".add_items"
             android:exported="false" />
         <activity
-            android:name=".Add_Items"
+            android:name=".items_details"
             android:exported="false" />
         <activity
-            android:name=".Item_Detail"
+            android:name=".login"
             android:exported="false" />
         <activity
-            android:name=".Login_Page"
-            android:exported="false" />
-        <activity
-            android:name=".Signup_Page"
+            android:name=".signup"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -1,8 +1,5 @@
 package com.example.suitcase;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,8 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.suitcase.ImagePickUtility;
-import com.example.suitcase.MainActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -53,7 +50,7 @@ public class edit_items extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_items);
+        setContentView(R.layout.activity_edit_item);
         databaseHelper = new DatabaseHelper(this);
 
         Bundle bundle = getIntent().getExtras();
@@ -73,11 +70,11 @@ public class edit_items extends AppCompatActivity {
             ).show();
         }
 
-        Button buttonEditItem = findViewById(R.id.buttonSaveItem);
-        editTextName = findViewById(R.id.editTextName);
-        editTextPrice = findViewById(R.id.editTextPrice);
-        editTextDescription = findViewById(R.id.editTextDescription);
-        imageView = findViewById(R.id.circleImageViewItem);
+        Button buttonEditItem = findViewById(R.id.btnEdit);
+        editTextName = findViewById(R.id.editItemName);
+        editTextPrice = findViewById(R.id.editItemPrice);
+        editTextDescription = findViewById(R.id.editItemDescription);
+        imageView = findViewById(R.id.edit_item_image);
 
         editTextName.setText(name);
         editTextDescription.setText(description);

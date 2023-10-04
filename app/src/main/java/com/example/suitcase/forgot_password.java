@@ -1,53 +1,54 @@
 package com.example.suitcase;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.suitcase.databinding.ActivityForgetPasswordPageBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgetPassword_Page extends AppCompatActivity {
-    ActivityForgetPasswordPageBinding binding;
-    FirebaseAuth auth;
+public class forgot_password extends AppCompatActivity {
+    Button GetEmail;
+    EditText resetEmail;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityForgetPasswordPageBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_forget_password_page);
 
-        auth = FirebaseAuth.getInstance();
-
-        binding.getEmailBtn.setOnClickListener(new View.OnClickListener() {
+        init();
+        firebaseAuth=FirebaseAuth.getInstance();
+    }
+    public void init(){
+        GetEmail=findViewById(R.id.getEmail_btn);
+        resetEmail=findViewById(R.id.forgot_email);
+        GetEmail.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String email = binding.forgotEmail.getText().toString().trim();
+            public void onClick(View view) {
+                String email=resetEmail.getText().toString().trim();
+                if (email.isEmpty()){
+                    Toast.makeText(forgot_password.this, "Enter Emial", Toast.LENGTH_SHORT).show();
+                }else {
+                    firebaseAuth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(forgot_password.this, "Check Email", Toast.LENGTH_SHORT).show();
 
-                // Check if the email exists and send a password reset email
-                auth.sendPasswordResetEmail(email)
-                        .addOnCompleteListener(ForgetPassword_Page.this, new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    // Password reset email sent successfully
-                                    Toast.makeText(ForgetPassword_Page.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), ResetPassword.class);
-                                    intent.putExtra("email", email);
-                                    startActivity(intent);
-                                } else {
-                                    // Email does not exist or there was an error
-                                    Toast.makeText(ForgetPassword_Page.this, "Email does not exist or an error occurred", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
     }
 }
+

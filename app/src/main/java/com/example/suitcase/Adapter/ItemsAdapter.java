@@ -1,79 +1,75 @@
-package com.example.suitcase.Adepter;
+package com.example.suitcase.Adapter;
 
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.suitcase.ItemsModel;
+import com.example.suitcase.Item;
 import com.example.suitcase.R;
 
 import java.util.ArrayList;
 
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
-    private final com.example.suitcase.Adapter.RecyclerItemsClickView recyclerItemsClickView;
-    private ArrayList<ItemsModel> itemsModels;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-    public ItemsAdapter(ArrayList<ItemsModel>itemsModels, com.example.suitcase.Adapter.RecyclerItemsClickView recyclerItemsClickView){
-        this.recyclerItemsClickView=recyclerItemsClickView;
-        this.itemsModels=itemsModels;
+public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
+    private final RecyclerItemsClickView itemClickListener;
+    private final ArrayList<Item> items;
+
+    public ItemsAdapter(ArrayList<Item> items, RecyclerItemsClickView itemClickListener) {
+        this.itemClickListener = itemClickListener;
+        this.items = items;
     }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.items,parent,false);
         return new ItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemsAdapter.ItemViewHolder holder, int position) {
-
-        ItemsModel itemsModel=itemsModels.get(position);
-        holder.textViewName.setText(itemsModel.getName());
-        if (itemsModel.isPurchased()){
-            holder.textViewName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.baseline_add_24,0);
-
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        Item item = items.get(position);
+        holder.textViewName.setText(item.getName());
+        if(item.isPurchased()) {
+            holder.textViewName.setCompoundDrawablesWithIntrinsicBounds(0,0, R.drawable.baseline_check_24, 0);
         }
-        holder.textViewprice.setText(String.valueOf(itemsModel.getPrice()));
-        holder.textViewDescription.setText(itemsModel.getDescription());
-        Uri imageUri=itemsModel.getImage();
-        if (imageUri!=null){
+        holder.textViewPrice.setText(String.valueOf(item.getPrice()));
+        holder.textViewDescription.setText(item.getDescription());
+        Uri imageUri = item.getImage();
+        if(imageUri != null) {
             holder.imageView.setImageURI(imageUri);
-
         }
-
-
     }
 
     @Override
     public int getItemCount() {
-
-        return itemsModels.size();
+        return items.size();
     }
-    public class ItemViewHolder extends RecyclerView.ViewHolder{
-        ImageView imageView;
-        TextView textViewName,textViewprice,textViewDescription;
+
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
+        CircleImageView imageView;
+        TextView textViewName, textViewPrice, textViewDescription;
+
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView= itemView.findViewById(R.id.item_image);
-            textViewName=itemView.findViewById(R.id.item_Name);
-            textViewprice=itemView.findViewById(R.id.item_price);
-            textViewDescription=itemView.findViewById(R.id.item_Dis);
+            imageView = itemView.findViewById(R.id.item_image);
+            textViewName = itemView.findViewById(R.id.item_name);
+            textViewPrice = itemView.findViewById(R.id.item_price);
+            textViewDescription = itemView.findViewById(R.id.item_dis);
 
             itemView.setOnClickListener(this::itemViewOnClick);
         }
 
         private void itemViewOnClick(View view) {
-            recyclerItemsClickView.onItemClick(view,getAdapterPosition());
-
+            itemClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 }

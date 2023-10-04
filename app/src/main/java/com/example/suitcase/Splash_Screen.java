@@ -1,45 +1,40 @@
 package com.example.suitcase;
 
-import static android.os.SystemClock.sleep;
-
-import androidx.appcompat.app.AppCompatActivity;
+import static java.lang.Thread.sleep;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
-import com.example.suitcase.databinding.ActivitySplashScreenBinding;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Splash_Screen extends AppCompatActivity {
-    ActivitySplashScreenBinding binding;
-    Animation animation;
+    ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivitySplashScreenBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_splash_screen);
+        imageView=findViewById(R.id.sImg);
 
-        //Set Animation in image and textView
-        animation= AnimationUtils.loadAnimation(this,R.anim.anim);
-        binding.logo.setAnimation(animation);
-        binding.txtSplash.setAnimation(animation);
+        Animation animation= AnimationUtils.loadAnimation(this,R.anim.anim);
+        imageView.startAnimation(animation);
 
-
-        //Splash Method
-        Thread thread = new Thread(new Runnable() {
+        Thread thread=new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    sleep(9000);
-                    Intent intent = new Intent(getApplicationContext(), Login_Page.class);
+                    sleep(3000);
+                    Intent intent=new Intent(Splash_Screen.this,signup.class);
                     startActivity(intent);
-                } catch (Exception e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+
         });
         thread.start();
-
     }
 }

@@ -1,14 +1,15 @@
-package com.example.suicasedesign;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.suitcase;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -16,29 +17,29 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class signup extends AppCompatActivity {
-    EditText Name,Email,Password,cPassword;
-    Button Signup,Signin;
+    EditText Email,Password,cPassword;
+    Button Signup;
+    TextView login;
     FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_signup_page);
 
         findId();
     }
     public void findId(){
-        Name=findViewById(R.id.etName);
-        Email=findViewById(R.id.etEmail);
-        Password=findViewById(R.id.EtPassword);
-        cPassword=findViewById(R.id.etCpassword);
+        Email=findViewById(R.id.txtSignupEmail);
+        Password=findViewById(R.id.txtSignupPassword);
+        cPassword=findViewById(R.id.txtSignupCpassword);
         Signup=findViewById(R.id.signupBtn);
-        Signin=findViewById(R.id.signinBtn);
+        login=findViewById(R.id.txt_login);
         firebaseAuth=FirebaseAuth.getInstance();
-        Signin.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(), login.class);
+                Intent intent=new Intent(getApplicationContext(),login.class);
                 startActivity(intent);
             }
         });
@@ -46,14 +47,10 @@ public class signup extends AppCompatActivity {
         Signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name=Name.getText().toString().trim();
                 String email=Email.getText().toString().trim();
                 String password=Password.getText().toString().trim();
                 String cpassword=cPassword.getText().toString().trim();
 
-                if (name.isEmpty()){
-                    Toast.makeText(signup.this, "Please Enter Name", Toast.LENGTH_SHORT).show();
-                }
                 if (email.isEmpty()){
                     Toast.makeText(signup.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
                 }
