@@ -157,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
             item.setPrice(cursor.getDouble(2));
             item.setDescription(cursor.getString(3));
             item.setImage(Uri.parse(cursor.getString(4)));
-
             items.add(cursor.getPosition(), item);
             itemsAdapter.notifyItemChanged(cursor.getPosition());
             Log.d("MainActivity", "Item: " + item.getId() + " added at " + cursor.getPosition());

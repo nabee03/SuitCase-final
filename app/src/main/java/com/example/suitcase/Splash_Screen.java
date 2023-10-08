@@ -1,7 +1,5 @@
 package com.example.suitcase;
 
-import static java.lang.Thread.sleep;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -10,31 +8,28 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.suitcase.databinding.ActivitySplashScreenBinding;
+
 public class Splash_Screen extends AppCompatActivity {
-    ImageView imageView;
+    private ActivitySplashScreenBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
-        imageView=findViewById(R.id.sImg);
+        binding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        ImageView imageView = binding.sImg;
 
-        Animation animation= AnimationUtils.loadAnimation(this,R.anim.anim);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim);
         imageView.startAnimation(animation);
 
-        Thread thread=new Thread(new Runnable() {
+        new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-                    sleep(3000);
-                    Intent intent=new Intent(Splash_Screen.this,signup.class);
-                    startActivity(intent);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Intent intent = new Intent(Splash_Screen.this, signup.class);
+                startActivity(intent);
+                finish();
             }
-
-        });
-        thread.start();
+        }, 3000);
     }
 }

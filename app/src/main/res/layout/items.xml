@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#368376"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp">
     <androidx.cardview.widget.CardView
@@ -15,6 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#4FBEC3"
             android:orientation="vertical"
             android:gravity="center">
             <de.hdodenhof.circleimageview.CircleImageView
@@ -30,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="Item Name "
                 android:textSize="26sp"
-                android:textColor="@color/white"
+                android:textColor="#090D37"
                 android:textStyle="bold"
                 android:layout_below="@id/item_image"
                 android:layout_marginTop="5dp"
@@ -41,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Rs. 600/-"
                 android:textSize="22sp"
-                android:textColor="@color/white"
+                android:textColor="#07450C"
                 android:textStyle="bold"
                 android:layout_below="@id/item_name"
                 android:layout_marginTop="5dp"
@@ -52,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="This is Good Product ..........."
                 android:textSize="22sp"
-                android:textColor="@color/white"
+                android:textColor="#6F9E8E06"
                 android:textStyle="bold"
                 android:layout_below="@id/item_price"
                 android:layout_marginTop="5dp"

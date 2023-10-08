@@ -95,7 +95,7 @@ public class items_details extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "");
-        intent.putExtra(Intent.EXTRA_TEXT, "Check ypur cool Application ");
+        intent.putExtra(Intent.EXTRA_TEXT, "Check My cool Application ");
         startActivity(Intent.createChooser(intent, "Share via"));
     }
 
